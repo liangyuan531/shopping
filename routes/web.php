@@ -16,7 +16,10 @@ Route::get('/', function () {
 });
 
 // back end
-//Login 
+// Login 
 Route::get('/admin/login', 'Admin\LoginController@index');
+// admin main page
 Route::get('/admin', 'Admin\IndexController@index');
+// vip management
+Route::resource('/admin/vipmanagement', 'Admin\VipManagementController');
 
