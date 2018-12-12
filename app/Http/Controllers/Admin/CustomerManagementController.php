@@ -6,12 +6,12 @@ use Illuminate\Http\Request;
 // import Controller
 use App\Http\Controllers\Controller;
 
-class VipManagementController extends Controller{
+class CustomerManagementController extends Controller{
     
     // admin/vipmanagement  get
     // show page
     function index(){
-        return view('admin/vip');
+        return view('admin/customer');
     }
 
     // admin/vipmanagement/create  get

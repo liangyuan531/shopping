@@ -22,4 +22,5 @@ Route::get('/admin/login', 'Admin\LoginController@index');
 Route::get('/admin', 'Admin\IndexController@index');
 // vip management
 Route::resource('/admin/vipmanagement', 'Admin\VipManagementController');
-
+// Customer management
+Route::resource('/admin/customermanagement', 'Admin\CustomerManagementController');
