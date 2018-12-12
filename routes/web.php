@@ -11,16 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// front end
+Route::get('/', 'Home\IndexController@index');
 
 // back end
-// Login 
-Route::get('/admin/login', 'Admin\LoginController@index');
-// admin main page
-Route::get('/admin', 'Admin\IndexController@index');
-// vip management
-Route::resource('/admin/vipmanagement', 'Admin\VipManagementController');
-// Customer management
-Route::resource('/admin/customermanagement', 'Admin\CustomerManagementController');
+Route::group(['prefix'=>'admin', 'namespace'=>'Admin'], function() {
+    // Login 
+    Route::get('login', 'LoginController@index');
+    // admin main page
+    Route::get('/', 'IndexController@index');
+    // vip management
+    Route::resource('vipmanagement', 'VipManagementController');
+    // Customer management
+    Route::resource('customermanagement', 'CustomerManagementController');
+});
