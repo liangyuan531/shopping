@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+// back end
+//Login 
+Route::get('/admin/login', 'Admin\LoginController@index');
+Route::get('/admin', 'Admin\IndexController@index');
+
