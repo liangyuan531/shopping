@@ -11,13 +11,12 @@
 |
 */
 
-// front end
-Route::get('/', 'Home\IndexController@index');
+
+// Login 
+Route::get('login', 'LoginController@index');
 
 // back end
-Route::group(['prefix'=>'admin', 'namespace'=>'Admin'], function() {
-    // Login 
-    Route::get('login', 'LoginController@index');
+Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>'adminlogin'], function() {
     // admin main page
     Route::get('/', 'IndexController@index');
     // vip management
@@ -25,3 +24,6 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'], function() {
     // Customer management
     Route::resource('customermanagement', 'CustomerManagementController');
 });
+
+// front end
+Route::get('/', 'Home\IndexController@index');
