@@ -26,15 +26,15 @@
       <div class="row">
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
           <div class="sidebar-sticky">
-            <ul class="nav flex-column">
+            <ul id="nav" class="nav flex-column nav-tabs">
               <li class="nav-item">
-                <a class="nav-link active" href="#">
+                <a class="nav-link" href="/admin">
                   <span data-feather="home"></span>
-                  Dashboard <span class="sr-only">(current)</span>
+                  Home <span class="sr-only">(current)</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="">
                   <span data-feather="file"></span>
                   Orders
                 </a>
@@ -106,10 +106,8 @@
           </div>
         </nav>
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+        <main role="main" class="ml-sm-auto col-lg-10 px-4">        
             @yield('content')
-          </div>
         </main>
       </div>
     </div>
@@ -117,15 +115,16 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
     <!-- <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script> -->
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
     <script src="/js/popper.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
-
-    <!-- Icons -->
     <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
     <script>
-      feather.replace()
-    </script>
+      feather.replace()</script>
   </body>
 </html>

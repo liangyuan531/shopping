@@ -17,13 +17,25 @@ class VipManagementController extends Controller{
     // admin/vipmanagement/create  get
     // adding page
     function create() {
-
+        return view('admin/add');
     }
 
     // admin/vipmanagement post
     // add items
-    function store() {
+    function store(Request $request) {
+        // parse string to array
+        parse_str($_POST['str'], $arr);
+        $arrInsert['username'] = $arr['username'];
+        $arrInsert['password'] = $arr['password'];
+        $arrInsert['time'] = time();
+        $arrInsert['isVip'] = '1';
+        $arrInsert['aid'] = 1;
 
+        if(\DB::table('user')->insert($arrInsert)) {
+            echo "1";
+        } else {
+            echo "0";
+        }
     }
 
     // admin/vipmanagement/{vipmanagement}  put

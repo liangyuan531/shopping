@@ -13,10 +13,10 @@
 
 
 // Login 
-Route::get('login', 'LoginController@index');
+Route::get('login', 'LoginController');
 
-// back end
-Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>'adminlogin'], function() {
+// back end  , 'middleware'=>'adminlogin'
+Route::group(['prefix'=>'admin', 'namespace'=>'Admin'], function() {
     // admin main page
     Route::get('/', 'IndexController@index');
     // vip management
