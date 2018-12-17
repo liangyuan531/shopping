@@ -5,13 +5,14 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 // import Controller
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AddNewVip;
 
 class VipManagementController extends Controller{
     
     // admin/vipmanagement  get
     // show page
     function index(){
-        $vips = \DB::table('user')->paginate(10);
+        $vips = \DB::table('user')->paginate(5);
         return view('admin.vip')->with('vips', $vips);
     }
 
@@ -23,7 +24,7 @@ class VipManagementController extends Controller{
 
     // admin/vipmanagement post
     // add items
-    function store(Request $request) {
+    function store(/*AddNewVip $request*/) {
         // parse string to array
         parse_str($_POST['str'], $arr);
         $rules = [
@@ -32,6 +33,7 @@ class VipManagementController extends Controller{
             'repassword' => 'required|same:password',
             'email' => 'required|email'
         ];
+        // $rules = $request->rules();
         $message = [
             "username.required" => "username is required",
             "username.unique" => "user exists",
@@ -72,7 +74,11 @@ class VipManagementController extends Controller{
     }
 
     // admin/vipmanagement/{vipmanagement} delete
-    function destroy() {
-
+    function destroy($id) {
+        if(\DB::table('user')->delete($id)){
+            return 1;
+        }else {
+            return 0;
+        }
     }
 }

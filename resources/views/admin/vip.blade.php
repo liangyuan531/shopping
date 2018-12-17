@@ -9,7 +9,6 @@
           <tr>
             <th>id</th>
             <th>Username</th>
-            <th>Email</th>
             <th>Regiser time</th>
             <th>Status</th>
             <th>Operation</th>
@@ -20,25 +19,35 @@
           <tr>
             <td>{{$vip->id}}</td>
             <td>{{$vip->username}}</td>
-            <td>{{$vip->email}}</td>
-            <td>{{$vip->time}}</td>
+            <td>{{date('d/M/Y',$vip->time)}}</td>
             <td>{{$vip->isVip}}</td>
             <td>
               <div class="btn-group btn-group-sm">
                 <button type="button" class="btn btn-primary">edit</button>
-                <button type="button" class="btn btn-danger">delete</button>
+                <button type="button" class="btn btn-danger"
+                      onclick="deleteVip(this, {{$vip->id}})">delete</button>
               </div>  
             </td>
           </tr> 
-          @endforeach                           
+          @endforeach 
+          <tr>
+            <td>
+              <div>
+                <button type="button" class="btn btn-success btn-sm"  
+                      data-toggle="modal"
+                      data-target="#addModal">add</button> 
+              </div>
+            </td>
+            <td style="colspan:4">
+                <div>
+                  {{$vips->links()}}
+                </div>
+            </td>
+          </tr>                          
         </tbody>
       </table>
-      <div>
-      <button type="button" class="btn btn-success btn-sm" 
-              
-              data-toggle="modal"
-              data-target="#addModal">add</button> 
-      </div>
+      
+      
     </div>
   </div>
 </div>
@@ -134,6 +143,17 @@
         }
       }else{
         alert('add failed');
+      }
+    })
+  }
+
+  function deleteVip(obj, id) {
+    $.post('vipmanagement/'+id, {"_token":'{{csrf_token()}}', "_method":"delete"}, function(data) {
+      if(data == 1) {
+       $(obj).parent().parent().parent().remove();
+       
+      }else {
+        alert('delete failed')
       }
     })
   }

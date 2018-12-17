@@ -13,7 +13,7 @@ class AddNewVip extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class AddNewVip extends FormRequest
     public function rules()
     {
         return [
-            //
+            'username' => 'required|unique:user|between:5,20',
+            'password' => 'required|between:6,20',
+            'repassword' => 'required|same:password',
+            'email' => 'required|email'
         ];
     }
 }
