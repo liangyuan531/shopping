@@ -11,7 +11,8 @@ class VipManagementController extends Controller{
     // admin/vipmanagement  get
     // show page
     function index(){
-        return view('admin/vip');
+        $vips = \DB::table('user')->paginate(10);
+        return view('admin.vip')->with('vips', $vips);
     }
 
     // admin/vipmanagement/create  get
@@ -25,17 +26,39 @@ class VipManagementController extends Controller{
     function store(Request $request) {
         // parse string to array
         parse_str($_POST['str'], $arr);
-        $arrInsert['username'] = $arr['username'];
-        $arrInsert['password'] = $arr['password'];
-        $arrInsert['time'] = time();
-        $arrInsert['isVip'] = '1';
-        $arrInsert['aid'] = 1;
+        $rules = [
+            'username' => 'required|unique:user|between:5,20',
+            'password' => 'required|between:6,20',
+            'repassword' => 'required|same:password',
+            'email' => 'required|email'
+        ];
+        $message = [
+            "username.required" => "username is required",
+            "username.unique" => "user exists",
+            "username.between" => "the length of username must be between 5 and 20",
+            "password.required" => "please input password",
+            "password.between" => "the length of password must be between 6 and 20",
+            "repassword.same" => "passwords are inconsistent",
+            "repassword.required" => "please input password again",
+            "email.email" => "invalid email address",
+            "email.required" => "please input email"
+        ];
 
-        if(\DB::table('user')->insert($arrInsert)) {
-            echo "1";
-        } else {
-            echo "0";
-        }
+        $validator = \Validator::make($arr, $rules, $message);
+        if($validator->passes()) {
+            $arrInsert['username'] = $arr['username'];
+            $arrInsert['password'] = $arr['password'];
+            $arrInsert['time'] = time();
+            $arrInsert['isVip'] = '1';
+            $arrInsert['aid'] = 1;
+            if(\DB::table('user')->insert($arrInsert)) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }else {
+            return $validator->getMessageBag()->getMessages();
+        }        
     }
 
     // admin/vipmanagement/{vipmanagement}  put
