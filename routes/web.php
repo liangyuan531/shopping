@@ -23,6 +23,8 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'], function() {
     Route::resource('vipmanagement', 'VipManagementController');
     // Customer management
     Route::resource('customermanagement', 'CustomerManagementController');
+    // Order management
+    Route::resource('orders', 'OrdersController');
 });
 
 // front end

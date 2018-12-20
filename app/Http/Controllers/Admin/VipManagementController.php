@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 // import Controller
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AddNewVip;
 
 class VipManagementController extends Controller{
     
@@ -69,8 +68,12 @@ class VipManagementController extends Controller{
     }
 
     // admin/vipmanagement/{vipmanagement}/edit
-    function edit() {
-
+    function edit($id) {
+        // get data according to id
+        $data = \DB::table('user')->find($id);
+        dd($data);
+        // assign data to page
+        //return view('admin.edit')->with("data", $data);
     }
 
     // admin/vipmanagement/{vipmanagement} delete
